@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+	"#cozyconiferous:fir_logs",
+	"#cozyconiferous:pine_logs",
+	"#cozyconiferous:redwood_logs"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "cozyconiferous:block/redwood_log",
+        "side": "cozyconiferous:block/redwood_log"
+    }
+}

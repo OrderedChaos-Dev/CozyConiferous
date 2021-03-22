@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "cozyconiferous:redwood_planks"
+    }
+  },
+  "result": {
+    "item": "cozyconiferous:redwood_boat"
+  }
+}

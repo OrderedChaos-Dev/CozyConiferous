@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+	"cozyconiferous:redwood_log",
+	"cozyconiferous:redwood_wood",
+	"cozyconiferous:stripped_redwood_log",
+	"cozyconiferous:stripped_redwood_wood"
+  ]
+}

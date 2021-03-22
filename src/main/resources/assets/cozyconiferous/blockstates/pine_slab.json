@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "cozyconiferous:block/pine_slab" },
+        "type=top": { "model": "cozyconiferous:block/pine_slab_top" },
+        "type=double": { "model": "cozyconiferous:block/pine_planks" }
+    }
+}

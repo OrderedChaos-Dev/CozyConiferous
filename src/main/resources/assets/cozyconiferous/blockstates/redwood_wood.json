@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "cozyconiferous:block/redwood_wood" },
+        "axis=z": { "model": "cozyconiferous:block/redwood_wood", "x": 90 },
+        "axis=x": { "model": "cozyconiferous:block/redwood_wood", "x": 90, "y": 90 }
+    }
+}

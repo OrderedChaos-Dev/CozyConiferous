@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "cozyconiferous:pine_logs"
+    }
+  ],
+  "result": {
+    "item": "cozyconiferous:pine_planks",
+    "count": 4
+  }
+}

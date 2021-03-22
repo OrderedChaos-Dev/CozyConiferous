@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y":  { "model": "cozyconiferous:block/stripped_fir_log" },
+        "axis=z":   { "model": "cozyconiferous:block/stripped_fir_log", "x": 90 },
+        "axis=x":   { "model": "cozyconiferous:block/stripped_fir_log", "x": 90, "y": 90 }
+    }
+}

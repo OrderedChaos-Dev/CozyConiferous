@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "cozyconiferous:block/redwood_slab" },
+        "type=top": { "model": "cozyconiferous:block/redwood_slab_top" },
+        "type=double": { "model": "cozyconiferous:block/redwood_planks" }
+    }
+}

@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[30,)"
+issueTrackerURL="https://github.com/OrderedChaos-Dev/CozyConiferous/issues"
+license="lol"
+
+[[mods]]
+	modId="cozyconiferous"
+	version="${version}"
+	displayName="Cozy Coniferous"
+	displayURL="https://www.ordered-chaos.dev/"
+	logoFile="cozyconiferous.png"
+	authors="solis_nova"
+	description='''
+	!!!!!!!!!!!!!!!!!!!!!!!!!
+	'''
+[[dependencies.cozyconiferous]]
+    modId="forge"
+    mandatory=true
+    versionRange="[30,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.cozyconiferous]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16,]"
+    ordering="NONE"
+    side="BOTH"

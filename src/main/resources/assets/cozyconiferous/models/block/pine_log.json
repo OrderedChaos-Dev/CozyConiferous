@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "cozyconiferous:block/pine_log_top",
+        "side": "cozyconiferous:block/pine_log"
+    }
+}

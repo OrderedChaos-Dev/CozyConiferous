@@ -1,0 +1,6 @@
+{
+    "parent": "block/leaves",
+    "textures": {
+        "all": "cozyconiferous:block/pine_leaves"
+    }
+}

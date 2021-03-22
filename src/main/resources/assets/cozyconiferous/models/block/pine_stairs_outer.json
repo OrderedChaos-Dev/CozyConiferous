@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "cozyconiferous:block/pine_planks",
+        "top": "cozyconiferous:block/pine_planks",
+        "side": "cozyconiferous:block/pine_planks"
+    }
+}

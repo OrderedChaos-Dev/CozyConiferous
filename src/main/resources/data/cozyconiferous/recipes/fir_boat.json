@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "cozyconiferous:fir_planks"
+    }
+  },
+  "result": {
+    "item": "cozyconiferous:fir_boat"
+  }
+}

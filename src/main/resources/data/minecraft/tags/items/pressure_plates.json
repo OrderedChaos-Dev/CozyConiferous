@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+	"cozyconiferous:fir_pressure_plate",
+	"cozyconiferous:pine_pressure_plate",
+	"cozyconiferous:redwood_pressure_plate"
+  ]
+}

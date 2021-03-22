@@ -1,0 +1,75 @@
+{
+	"itemGroup.cozyconiferous": "Cozy Coniferous",
+	
+	"biome.cozyconiferous.redwoods": "Redwoods",
+	"biome.cozyconiferous.redwood_peaks": "Redwood Peaks",
+	"biome.cozyconiferous.snowy_redwoods": "Snowy Redwoods",
+	"biome.cozyconiferous.boreal_forest": "Boreal Forest",
+	"biome.cozyconiferous.snowy_boreal_forest": "Snowy Boreal Forest",
+	"biome.cozyconiferous.alpine_heights": "Alpine Heights",
+	"biome.cozyconiferous.pine_meadows": "Pine Meadows",
+	
+	"block.cozyconiferous.fir_log": "Fir Log",
+	"block.cozyconiferous.pine_log": "Pine Log",
+	"block.cozyconiferous.redwood_log": "Redwood Log",
+	
+	"block.cozyconiferous.fir_leaves": "Fir Leaves",
+	"block.cozyconiferous.pine_leaves": "Pine Leaves",
+	"block.cozyconiferous.redwood_leaves": "Redwood Leaves",
+	
+	"block.cozyconiferous.fir_sapling": "Fir Sapling",
+	"block.cozyconiferous.pine_sapling": "Pine Sapling",
+	"block.cozyconiferous.redwood_sapling": "Redwood Sapling",
+	
+	"block.cozyconiferous.fir_planks": "Fir Planks",
+	"block.cozyconiferous.pine_planks": "Pine Planks",
+	"block.cozyconiferous.redwood_planks": "Redwood Planks",
+	
+	"block.cozyconiferous.fir_wood": "Fir Wood",
+	"block.cozyconiferous.pine_wood": "Pine Wood",
+	"block.cozyconiferous.redwood_wood": "Redwood Wood",
+	
+	"block.cozyconiferous.stripped_fir_log": "Stripped Fir Log",
+	"block.cozyconiferous.stripped_pine_log": "Stripped Pine Log",
+	"block.cozyconiferous.stripped_redwood_log": "Stripped Redwood Log",
+	
+	"block.cozyconiferous.stripped_fir_wood": "Stripped Fir Wood",
+	"block.cozyconiferous.stripped_pine_wood": "Stripped Pine Wood",
+	"block.cozyconiferous.stripped_redwood_wood": "Stripped Redwood Wood",
+	
+	"block.cozyconiferous.fir_stairs": "Fir Stairs",
+	"block.cozyconiferous.pine_stairs": "Pine Stairs",
+	"block.cozyconiferous.redwood_stairs": "Redwood Stairs",
+	
+	"block.cozyconiferous.fir_slab": "Fir Slab",
+	"block.cozyconiferous.pine_slab": "Pine Slab",
+	"block.cozyconiferous.redwood_slab": "Redwood Slab",
+	
+	"block.cozyconiferous.fir_fence": "Fir Fence",
+	"block.cozyconiferous.pine_fence": "Pine Fence",
+	"block.cozyconiferous.redwood_fence": "Redwood Fence",
+	
+	"block.cozyconiferous.fir_fence_gate": "Fir Fence Gate",
+	"block.cozyconiferous.pine_fence_gate": "Pine Fence Gate",
+	"block.cozyconiferous.redwood_fence_gate": "Redwood Fence Gate",
+	
+	"block.cozyconiferous.fir_door": "Fir Door",
+	"block.cozyconiferous.pine_door": "Pine Door",
+	"block.cozyconiferous.redwood_door": "Redwood Door",
+	
+	"block.cozyconiferous.fir_trapdoor": "Fir Trapdoor",
+	"block.cozyconiferous.pine_trapdoor": "Pine Trapdoor",
+	"block.cozyconiferous.redwood_trapdoor": "Redwood Trapdoor",
+	
+	"block.cozyconiferous.fir_button": "Fir Button",
+	"block.cozyconiferous.pine_button": "Pine Button",
+	"block.cozyconiferous.redwood_button": "Redwood Button",
+	
+	"block.cozyconiferous.fir_pressure_plate": "Fir Pressure Plate",
+	"block.cozyconiferous.pine_pressure_plate": "Pine Pressure Plate",
+	"block.cozyconiferous.redwood_pressure_plate": "Redwood Pressure Plate",
+	
+	"item.cozyconiferous.fir_boat": "Fir Boat",
+	"item.cozyconiferous.pine_boat": "Pine Boat",
+	"item.cozyconiferous.redwood_boat": "Redwood Boat"
+}

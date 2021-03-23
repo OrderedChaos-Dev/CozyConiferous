@@ -37,6 +37,7 @@ public class BorealForestBiome {
 		DefaultBiomeFeatures.withMonsterRoom(biomeGenBuilder);
 		DefaultBiomeFeatures.withForestRocks(biomeGenBuilder);
 		DefaultBiomeFeatures.withLargeFern(biomeGenBuilder);
+		DefaultBiomeFeatures.withForestRocks(biomeGenBuilder);
 		DefaultBiomeFeatures.withCommonOverworldBlocks(biomeGenBuilder);
 		DefaultBiomeFeatures.withOverworldOres(biomeGenBuilder);
 		DefaultBiomeFeatures.withDisks(biomeGenBuilder);

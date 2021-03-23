@@ -7,6 +7,7 @@ import cozyconiferous.common.worldgen.biomes.AlpineHeightsBiome;
 import cozyconiferous.common.worldgen.biomes.BorealForestBiome;
 import cozyconiferous.common.worldgen.biomes.PineMeadowsBiome;
 import cozyconiferous.common.worldgen.biomes.RedwoodsBiome;
+import cozyconiferous.core.CCConfig;
 import cozyconiferous.core.CozyConiferous;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -59,13 +60,20 @@ public class CCBiomes {
 	}
 	
 	public static void addBiomes() {
-		BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.REDWOODS, 1));
-		BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.REDWOOD_PEAKS, 1));
-		BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.SNOWY_REDWOODS, 1));
-		BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.BOREAL_FOREST, 1));
-		BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.SNOWY_BOREAL_FOREST, 1));
-		BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.ALPINE_HEIGHTS, 1));
-		BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.PINE_MEADOWS, 1));
+		if(CCConfig.redwoods.get())
+			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.REDWOODS, 1));
+		if(CCConfig.redwood_peaks.get())
+			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.REDWOOD_PEAKS, 1));
+		if(CCConfig.snowy_redwoods.get())
+			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.SNOWY_REDWOODS, 1));
+		if(CCConfig.boreal_forest.get())
+			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.BOREAL_FOREST, 1));
+		if(CCConfig.snowy_boreal_forest.get())
+			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.SNOWY_BOREAL_FOREST, 1));
+		if(CCConfig.alpine_heights.get())
+			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.ALPINE_HEIGHTS, 1));
+		if(CCConfig.pine_meadows.get())
+			BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(Keys.PINE_MEADOWS, 1));
 	}
 	
 	public static void addTypes() {

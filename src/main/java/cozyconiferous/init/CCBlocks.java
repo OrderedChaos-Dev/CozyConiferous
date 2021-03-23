@@ -1,6 +1,7 @@
 package cozyconiferous.init;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 import cozyconiferous.common.blocks.trees.FirTree;
 import cozyconiferous.common.blocks.trees.PineTree;
@@ -9,6 +10,7 @@ import cozyconiferous.core.CozyConiferous;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
@@ -24,11 +26,15 @@ import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.block.WoodButtonBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -55,13 +61,13 @@ public class CCBlocks {
 
 		fir_sapling = registerBlockWithFuel(new SaplingBlock(new FirTree(), Properties.from(Blocks.OAK_SAPLING)), "fir_sapling",
 				100);
-		fir_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.BROWN), "fir_log", 300);
+		fir_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.BROWN, () -> stripped_fir_log), "fir_log", 300);
 		fir_leaves = registerBlock(new LeavesBlock(Properties.from(Blocks.OAK_LEAVES)), "fir_leaves");
-		fir_wood = registerBlockWithFuel(createLogBlock(MaterialColor.BROWN, MaterialColor.BROWN), "fir_wood", 300);
+		fir_wood = registerBlockWithFuel(createLogBlock(MaterialColor.BROWN, MaterialColor.BROWN, () -> stripped_fir_wood), "fir_wood", 300);
 		fir_planks = registerBlockWithFuel(createPlanksBlock(), "fir_planks", 300);
-		stripped_fir_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD),
+		stripped_fir_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD, null),
 				"stripped_fir_log", 300);
-		stripped_fir_wood = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD),
+		stripped_fir_wood = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD, null),
 				"stripped_fir_wood", 300);
 		fir_pressure_plate = registerBlockWithFuel(new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
 				AbstractBlock.Properties.create(Material.WOOD, fir_planks.getMaterialColor()).doesNotBlockMovement()
@@ -81,13 +87,13 @@ public class CCBlocks {
 		
 		pine_sapling = registerBlockWithFuel(new SaplingBlock(new PineTree(), Properties.from(Blocks.OAK_SAPLING)), "pine_sapling",
 				100);
-		pine_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.BROWN), "pine_log", 300);
+		pine_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.BROWN, () -> stripped_pine_log), "pine_log", 300);
 		pine_leaves = registerBlock(new LeavesBlock(Properties.from(Blocks.OAK_LEAVES)), "pine_leaves");
-		pine_wood = registerBlockWithFuel(createLogBlock(MaterialColor.BROWN, MaterialColor.BROWN), "pine_wood", 300);
+		pine_wood = registerBlockWithFuel(createLogBlock(MaterialColor.BROWN, MaterialColor.BROWN, () -> stripped_pine_wood), "pine_wood", 300);
 		pine_planks = registerBlockWithFuel(createPlanksBlock(), "pine_planks", 300);
-		stripped_pine_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD),
+		stripped_pine_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD, null),
 				"stripped_pine_log", 300);
-		stripped_pine_wood = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD),
+		stripped_pine_wood = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD, null),
 				"stripped_pine_wood", 300);
 		pine_pressure_plate = registerBlockWithFuel(new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
 				AbstractBlock.Properties.create(Material.WOOD, pine_planks.getMaterialColor()).doesNotBlockMovement()
@@ -107,13 +113,13 @@ public class CCBlocks {
 		
 		redwood_sapling = registerBlockWithFuel(new SaplingBlock(new RedwoodTree(), Properties.from(Blocks.OAK_SAPLING)), "redwood_sapling",
 				100);
-		redwood_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.BROWN), "redwood_log", 300);
+		redwood_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.BROWN, () -> stripped_redwood_log), "redwood_log", 300);
 		redwood_leaves = registerBlock(new LeavesBlock(Properties.from(Blocks.OAK_LEAVES)), "redwood_leaves");
-		redwood_wood = registerBlockWithFuel(createLogBlock(MaterialColor.BROWN, MaterialColor.BROWN), "redwood_wood", 300);
+		redwood_wood = registerBlockWithFuel(createLogBlock(MaterialColor.BROWN, MaterialColor.BROWN, () -> stripped_redwood_wood), "redwood_wood", 300);
 		redwood_planks = registerBlockWithFuel(createPlanksBlock(), "redwood_planks", 300);
-		stripped_redwood_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD),
+		stripped_redwood_log = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD, null),
 				"stripped_redwood_log", 300);
-		stripped_redwood_wood = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD),
+		stripped_redwood_wood = registerBlockWithFuel(createLogBlock(MaterialColor.WOOD, MaterialColor.WOOD, null),
 				"stripped_redwood_wood", 300);
 		redwood_pressure_plate = registerBlockWithFuel(new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
 				AbstractBlock.Properties.create(Material.WOOD, redwood_planks.getMaterialColor()).doesNotBlockMovement()
@@ -172,13 +178,17 @@ public class CCBlocks {
 		return block;
 	}
 
-	/*
-	 * from private method in Blocks.class
-	 */
-	public static RotatedPillarBlock createLogBlock(MaterialColor topColor, MaterialColor barkColor) {
+	public static RotatedPillarBlock createLogBlock(MaterialColor topColor, MaterialColor barkColor, Supplier<Block> stripped) {
 		return new RotatedPillarBlock(AbstractBlock.Properties.create(Material.WOOD, (state) -> {
 			return state.get(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topColor : barkColor;
-		}).hardnessAndResistance(2.0F).sound(SoundType.WOOD));
+		}).hardnessAndResistance(2.0F).sound(SoundType.WOOD)) {
+			@Override
+			public BlockState getToolModifiedState(BlockState state, World world, BlockPos pos, PlayerEntity player, ItemStack stack, ToolType toolType) {
+				if(toolType == ToolType.AXE)
+					return stripped.get().getDefaultState().with(RotatedPillarBlock.AXIS, state.get(RotatedPillarBlock.AXIS));
+				return super.getToolModifiedState(state, world, pos, player, stack, toolType);
+			}
+		};
 	}
 
 	public static Block createPlanksBlock() {

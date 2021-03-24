@@ -69,6 +69,10 @@
 	"block.cozyconiferous.pine_pressure_plate": "Pine Pressure Plate",
 	"block.cozyconiferous.redwood_pressure_plate": "Redwood Pressure Plate",
 	
+	"block.cozyconiferous.potted_fir_sapling": "Potted Fir Sapling",
+	"block.cozyconiferous.potted_pine_sapling": "Potted Pine Sapling",
+	"block.cozyconiferous.potted_redwood_sapling": "Potted Redwood Sapling",
+	
 	"item.cozyconiferous.fir_boat": "Fir Boat",
 	"item.cozyconiferous.pine_boat": "Pine Boat",
 	"item.cozyconiferous.redwood_boat": "Redwood Boat"

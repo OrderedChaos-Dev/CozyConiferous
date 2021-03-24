@@ -15,6 +15,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.RotatedPillarBlock;
@@ -55,6 +56,8 @@ public class CCBlocks {
 			redwood_wood, stripped_redwood_wood, redwood_sign, redwood_wall_sign, redwood_pressure_plate,
 			redwood_trapdoor, redwood_button, redwood_slab, redwood_fence_gate, redwood_fence, redwood_door,
 			redwood_stairs;
+	
+	public static Block potted_fir_sapling, potted_pine_sapling, potted_redwood_sapling;
 
 	@SubscribeEvent
 	public static void initBlocks(RegistryEvent.Register<Block> event) {
@@ -137,6 +140,10 @@ public class CCBlocks {
 				new StairsBlock(() -> redwood_planks.getDefaultState(), Properties.from(Blocks.SPRUCE_STAIRS)),
 				"redwood_stairs", 300);
 		
+		potted_fir_sapling =  registerBlockWithoutItem(createFlowerPot(fir_sapling), "potted_fir_sapling");
+		potted_pine_sapling =  registerBlockWithoutItem(createFlowerPot(pine_sapling), "potted_pine_sapling");
+		potted_redwood_sapling =  registerBlockWithoutItem(createFlowerPot(redwood_sapling), "potted_redwood_sapling");
+		
 		BLOCKS.forEach((block) -> event.getRegistry().register(block));
 	}
 
@@ -194,5 +201,11 @@ public class CCBlocks {
 	public static Block createPlanksBlock() {
 		return new Block(Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F)
 				.sound(SoundType.WOOD));
+	}
+	
+	public static Block createFlowerPot(Block plant) {
+		Block block = new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, () -> plant, Properties.from(Blocks.FLOWER_POT));
+		((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(plant.getRegistryName(), () -> block);
+		return block;
 	}
 }

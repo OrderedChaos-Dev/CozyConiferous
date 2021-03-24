@@ -23,5 +23,9 @@ public class BlockRendering {
 		RenderTypeLookup.setRenderLayer(CCBlocks.fir_sapling, cutout_mipped);
 		RenderTypeLookup.setRenderLayer(CCBlocks.pine_sapling, cutout_mipped);
 		RenderTypeLookup.setRenderLayer(CCBlocks.redwood_sapling, cutout_mipped);
+		
+		RenderTypeLookup.setRenderLayer(CCBlocks.potted_fir_sapling, cutout);
+		RenderTypeLookup.setRenderLayer(CCBlocks.potted_pine_sapling, cutout);
+		RenderTypeLookup.setRenderLayer(CCBlocks.potted_redwood_sapling, cutout);
 	}
 }

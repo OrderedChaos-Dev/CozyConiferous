@@ -8,11 +8,9 @@ license="lol"
 	version="${version}"
 	displayName="Cozy Coniferous"
 	displayURL="https://www.ordered-chaos.dev/"
-	logoFile="cozyconiferous.png"
+	logoFile="cc.png"
 	authors="solis_nova"
-	description='''
-	!!!!!!!!!!!!!!!!!!!!!!!!!
-	'''
+	description='A collection of biomes with a coniferous theme!'
 [[dependencies.cozyconiferous]]
     modId="forge"
     mandatory=true

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import cozyconiferous.client.BlockRendering;
 import cozyconiferous.client.EntityRendering;
 import cozyconiferous.init.CCConfiguredFeatures;
+import cozyconiferous.init.CCVanillaIntegration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -31,6 +32,7 @@ public class CozyConiferous
 
     private void setup(final FMLCommonSetupEvent event) {
     	CCConfiguredFeatures.init();
+    	CCVanillaIntegration.init();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

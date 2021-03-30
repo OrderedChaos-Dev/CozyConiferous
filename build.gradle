@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.5-1.0.0BETA'
+version = '1.16.5-1.0.1BETA'
 group = 'com.cozyconiferous'
 archivesBaseName = 'cozyconiferous'
 
@@ -117,7 +117,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "mobtastic",
+            "Specification-Title": "cozyconiferous",
             "Specification-Vendor": "orderedchaos",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,

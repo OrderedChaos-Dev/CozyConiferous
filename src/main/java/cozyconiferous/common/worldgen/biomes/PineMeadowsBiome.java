@@ -31,6 +31,7 @@ public class PineMeadowsBiome {
 		DefaultBiomeFeatures.withLavaAndWaterLakes(biomeGenBuilder);
 		DefaultBiomeFeatures.withMonsterRoom(biomeGenBuilder);
 		DefaultBiomeFeatures.withNoiseTallGrass(biomeGenBuilder);
+		DefaultBiomeFeatures.withTaigaGrassVegetation(biomeGenBuilder);
 		DefaultBiomeFeatures.withCommonOverworldBlocks(biomeGenBuilder);
 		DefaultBiomeFeatures.withOverworldOres(biomeGenBuilder);
 		DefaultBiomeFeatures.withDisks(biomeGenBuilder);

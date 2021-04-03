@@ -24,6 +24,8 @@ public class CCConfig {
 	public static ForgeConfigSpec.ConfigValue<Boolean> alpine_heights;
 	
 	static {
+		COMMON_BUILDER.comment("Cozy Coniferous Settings").push("Biome Settings");
+		
 		boreal_forest = COMMON_BUILDER.define("boreal_forest", true);
 		snowy_boreal_forest = COMMON_BUILDER.define("snowy_boreal_forest", true);
 		redwoods = COMMON_BUILDER.define("redwoods", true);
@@ -32,6 +34,7 @@ public class CCConfig {
 		pine_meadows = COMMON_BUILDER.define("pine_meadows", true);
 		alpine_heights = COMMON_BUILDER.define("alpine_heights", true);
 		
+		COMMON_BUILDER.pop();
 		COMMON_CONFIG = COMMON_BUILDER.build();
 	}
 	

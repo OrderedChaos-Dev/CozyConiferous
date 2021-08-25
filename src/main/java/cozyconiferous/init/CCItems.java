@@ -22,9 +22,9 @@ public class CCItems {
 	
 	@SubscribeEvent
 	public static void initItems(RegistryEvent.Register<Item> event) {
-		fir_boat = registerItem(new CCBoatItem(CCBoatEntity.CCType.FIR, new Item.Properties().maxStackSize(1).group(CCItemGroup.INSTANCE)), "fir_boat");
-		pine_boat = registerItem(new CCBoatItem(CCBoatEntity.CCType.PINE, new Item.Properties().maxStackSize(1).group(CCItemGroup.INSTANCE)), "pine_boat");
-		redwood_boat = registerItem(new CCBoatItem(CCBoatEntity.CCType.REDWOOD, new Item.Properties().maxStackSize(1).group(CCItemGroup.INSTANCE)), "redwood_boat");
+		fir_boat = registerItem(new CCBoatItem(CCBoatEntity.CCType.FIR, new Item.Properties().stacksTo(1).tab(CCItemGroup.INSTANCE)), "fir_boat");
+		pine_boat = registerItem(new CCBoatItem(CCBoatEntity.CCType.PINE, new Item.Properties().stacksTo(1).tab(CCItemGroup.INSTANCE)), "pine_boat");
+		redwood_boat = registerItem(new CCBoatItem(CCBoatEntity.CCType.REDWOOD, new Item.Properties().stacksTo(1).tab(CCItemGroup.INSTANCE)), "redwood_boat");
 		
 		event.getRegistry().registerAll(ITEMS.toArray(new Item[0]));
 	}
@@ -45,7 +45,7 @@ public class CCItems {
 		}
 
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(CCBlocks.fir_sapling);
 		}
 	}

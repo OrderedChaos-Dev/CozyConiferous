@@ -1,6 +1,7 @@
 package cozyconiferous.common.worldgen.biomes;
 
 import cozyconiferous.common.worldgen.BiomeUtils;
+import cozyconiferous.init.CCConfiguredSurfaceBuilders;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeAmbience;
 import net.minecraft.world.biome.BiomeGenerationSettings;
@@ -11,46 +12,43 @@ import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.structure.StructureFeatures;
-import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilders;
 
 public class PineMeadowsBiome {
 
 	public static Biome makePineMeadowsBiome() {
 		MobSpawnInfo.Builder mobSpawnInfo = new MobSpawnInfo.Builder();
-		DefaultBiomeFeatures.withSpawnsWithHorseAndDonkey(mobSpawnInfo);
-		mobSpawnInfo.isValidSpawnBiomeForPlayer();
+		DefaultBiomeFeatures.plainsSpawns(mobSpawnInfo);
+		mobSpawnInfo.setPlayerCanSpawn();
 
 		BiomeGenerationSettings.Builder biomeGenBuilder = (new BiomeGenerationSettings.Builder())
-				.withSurfaceBuilder(ConfiguredSurfaceBuilders.field_244178_j);
-		biomeGenBuilder.withStructure(StructureFeatures.VILLAGE_TAIGA)
-				.withStructure(StructureFeatures.PILLAGER_OUTPOST);
+				.surfaceBuilder(CCConfiguredSurfaceBuilders.PINE_MEADOWS);
+		biomeGenBuilder.addStructureStart(StructureFeatures.VILLAGE_TAIGA)
+				.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
 
-		DefaultBiomeFeatures.withStrongholdAndMineshaft(biomeGenBuilder);
-		biomeGenBuilder.withStructure(StructureFeatures.RUINED_PORTAL);
-		DefaultBiomeFeatures.withCavesAndCanyons(biomeGenBuilder);
-		DefaultBiomeFeatures.withLavaAndWaterLakes(biomeGenBuilder);
-		DefaultBiomeFeatures.withMonsterRoom(biomeGenBuilder);
-		DefaultBiomeFeatures.withNoiseTallGrass(biomeGenBuilder);
-		DefaultBiomeFeatures.withTaigaGrassVegetation(biomeGenBuilder);
-		DefaultBiomeFeatures.withCommonOverworldBlocks(biomeGenBuilder);
-		DefaultBiomeFeatures.withOverworldOres(biomeGenBuilder);
-		DefaultBiomeFeatures.withDisks(biomeGenBuilder);
-		biomeGenBuilder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.FLOWER_PLAIN_DECORATED);
-		biomeGenBuilder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.PATCH_GRASS_PLAIN);
-
-		DefaultBiomeFeatures.withNormalMushroomGeneration(biomeGenBuilder);
-		DefaultBiomeFeatures.withSugarCaneAndPumpkins(biomeGenBuilder);
-		biomeGenBuilder.withFeature(Decoration.VEGETAL_DECORATION, Features.PATCH_SUNFLOWER);
-		biomeGenBuilder.withFeature(Decoration.VEGETAL_DECORATION, Features.OAK_BEES_0002);
-
-		DefaultBiomeFeatures.withLavaAndWaterSprings(biomeGenBuilder);
-		DefaultBiomeFeatures.withFrozenTopLayer(biomeGenBuilder);
-		return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).category(Biome.Category.PLAINS).depth(0.125F)
+		DefaultBiomeFeatures.addDefaultOverworldLandStructures(biomeGenBuilder);
+		biomeGenBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
+		DefaultBiomeFeatures.addDefaultCarvers(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultLakes(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultMonsterRoom(biomeGenBuilder);
+		DefaultBiomeFeatures.addTaigaGrass(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultUndergroundVariety(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultOres(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultSoftDisks(biomeGenBuilder);
+		biomeGenBuilder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.FLOWER_PLAIN_DECORATED);
+		biomeGenBuilder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.PATCH_GRASS_PLAIN);
+		DefaultBiomeFeatures.addDefaultMushrooms(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultExtraVegetation(biomeGenBuilder);
+		biomeGenBuilder.addFeature(Decoration.VEGETAL_DECORATION, Features.PATCH_SUNFLOWER);
+		biomeGenBuilder.addFeature(Decoration.VEGETAL_DECORATION, Features.OAK_BEES_0002);
+		DefaultBiomeFeatures.addDefaultSprings(biomeGenBuilder);
+		DefaultBiomeFeatures.addSurfaceFreezing(biomeGenBuilder);
+		return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.PLAINS).depth(0.125F)
 				.scale(0.05F).temperature(0.7F).downfall(0.8F)
-				.setEffects((new BiomeAmbience.Builder()).setWaterColor(4159204).setWaterFogColor(329011).withGrassColor(0xa7cc5c)
-						.withFoliageColor(0xa7cc5c)
-						.setFogColor(12638463).withSkyColor(BiomeUtils.getSkyColorWithTemperatureModifier(0.8F))
-						.setMoodSound(MoodSoundAmbience.DEFAULT_CAVE).build())
-				.withMobSpawnSettings(mobSpawnInfo.copy()).withGenerationSettings(biomeGenBuilder.build()).build();
+				.specialEffects((new BiomeAmbience.Builder()).waterColor(4159204).waterFogColor(329011)
+						.grassColorOverride(0x59cf70)
+						.foliageColorOverride(0x69cf59)
+						.fogColor(12638463).skyColor(BiomeUtils.getSkyColorWithTemperatureModifier(0.8F))
+						.ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS).build())
+				.mobSpawnSettings(mobSpawnInfo.build()).generationSettings(biomeGenBuilder.build()).build();
 	}
 }

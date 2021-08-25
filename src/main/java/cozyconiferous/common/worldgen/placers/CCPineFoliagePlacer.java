@@ -19,24 +19,24 @@ public class CCPineFoliagePlacer extends SpruceFoliagePlacer {
 	}
 	
 	@Override
-	protected void func_230372_a_(IWorldGenerationReader world, Random rand, BaseTreeFeatureConfig config,
-			int p_230372_4_, FoliagePlacer.Foliage foliage, int trunkOffset, int p_230372_7_, Set<BlockPos> blocks,
-			int leavesStartHeight, MutableBoundingBox box) {
-		BlockPos blockpos = foliage.func_236763_a_();
+	protected void createFoliage(IWorldGenerationReader world, Random rand,
+			BaseTreeFeatureConfig config, int p_230372_4_, FoliagePlacer.Foliage foliage, int p_230372_6_,
+			int p_230372_7_, Set<BlockPos> blocks, int p_230372_9_, MutableBoundingBox box) {
+		BlockPos blockpos = foliage.foliagePos();
 		int i = rand.nextInt(2);
 		int j = 1;
 		int k = 1;
 		int m = 0;
 
-		for (int l = leavesStartHeight; l >= -trunkOffset; --l) {
+		for (int l = p_230372_9_; l >= -p_230372_6_; --l) {
 			if(m < 4)
-				placeLeaves(world, rand, config, blockpos, i, blocks, l, foliage.func_236765_c_(), box);
+				placeLeaves(world, rand, config, blockpos, i, blocks, l, foliage.doubleTrunk(), box);
 			else
-				placeLeavesWithChance(world, rand, config, blockpos, i, blocks, l, foliage.func_236765_c_(), box, 0.8F);
+				placeLeavesWithChance(world, rand, config, blockpos, i, blocks, l, foliage.doubleTrunk(), box, 0.8F);
 			if (i >= j) {
 				i = k;
 				k = 2;
-				j = Math.min(j + 1, p_230372_7_ + foliage.func_236764_b_());
+				j = Math.min(j + 1, p_230372_7_ + foliage.radiusOffset());
 			} else {
 				++i;
 			}
@@ -50,13 +50,12 @@ public class CCPineFoliagePlacer extends SpruceFoliagePlacer {
 
 		for (int j = -p_236753_5_; j <= p_236753_5_ + i; ++j) {
 			for (int k = -p_236753_5_; k <= p_236753_5_ + i; ++k) {
-				if (!this.func_230375_b_(rand, j, p_236753_7_, k, p_236753_5_, p_236753_8_)) {
-					blockpos$mutable.setAndOffset(pos, j, p_236753_7_, k);
-					if (TreeFeature.isReplaceableAt(world, blockpos$mutable) && rand.nextFloat() < 0.8F) {
-						world.setBlockState(blockpos$mutable,
-								config.leavesProvider.getBlockState(rand, blockpos$mutable), 19);
-						box.expandTo(new MutableBoundingBox(blockpos$mutable, blockpos$mutable));
-						blocks.add(blockpos$mutable.toImmutable());
+				if (!this.shouldSkipLocationSigned(rand, j, p_236753_7_, k, p_236753_5_, p_236753_8_)) {
+					blockpos$mutable.setWithOffset(pos, j, p_236753_7_, k);
+					if (TreeFeature.validTreePos(world, blockpos$mutable) && rand.nextFloat() < 0.8F) {
+						world.setBlock(blockpos$mutable, config.leavesProvider.getState(rand, blockpos$mutable), 19);
+						box.expand(new MutableBoundingBox(blockpos$mutable, blockpos$mutable));
+						blocks.add(blockpos$mutable.immutable());
 					}
 				}
 			}
@@ -69,13 +68,12 @@ public class CCPineFoliagePlacer extends SpruceFoliagePlacer {
 
 		for (int j = -p_236753_5_; j <= p_236753_5_ + i; ++j) {
 			for (int k = -p_236753_5_; k <= p_236753_5_ + i; ++k) {
-				if (!this.func_230375_b_(rand, j, p_236753_7_, k, p_236753_5_, p_236753_8_)) {
-					blockpos$mutable.setAndOffset(pos, j, p_236753_7_, k);
-					if (TreeFeature.isReplaceableAt(world, blockpos$mutable) && rand.nextFloat() < chance) {
-						world.setBlockState(blockpos$mutable,
-								config.leavesProvider.getBlockState(rand, blockpos$mutable), 19);
-						box.expandTo(new MutableBoundingBox(blockpos$mutable, blockpos$mutable));
-						blocks.add(blockpos$mutable.toImmutable());
+				if (!this.shouldSkipLocationSigned(rand, j, p_236753_7_, k, p_236753_5_, p_236753_8_)) {
+					blockpos$mutable.setWithOffset(pos, j, p_236753_7_, k);
+					if (TreeFeature.validTreePos(world, blockpos$mutable) && rand.nextFloat() < chance) {
+						world.setBlock(blockpos$mutable, config.leavesProvider.getState(rand, blockpos$mutable), 19);
+						box.expand(new MutableBoundingBox(blockpos$mutable, blockpos$mutable));
+						blocks.add(blockpos$mutable.immutable());
 					}
 				}
 			}

@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 public class CCBoatItem extends Item {
 	
-	private static final Predicate<Entity> field_219989_a = EntityPredicates.NOT_SPECTATING.and(Entity::canBeCollidedWith);
+	private static final Predicate<Entity> ENTITY_PREDICATE = EntityPredicates.NO_SPECTATORS.and(Entity::canBeCollidedWith);
 	private final CCBoatEntity.CCType type;
 
 	public CCBoatItem(CCBoatEntity.CCType typeIn, Item.Properties properties) {
@@ -29,46 +29,47 @@ public class CCBoatItem extends Item {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack itemstack = playerIn.getHeldItem(handIn);
-		RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
+	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
+		RayTraceResult raytraceresult = getPlayerPOVHitResult(world, player, RayTraceContext.FluidMode.ANY);
 		if (raytraceresult.getType() == RayTraceResult.Type.MISS) {
-			return ActionResult.resultPass(itemstack);
+			return ActionResult.pass(itemstack);
 		} else {
-			Vector3d vector3d = playerIn.getLook(1.0F);
+			Vector3d vector3d = player.getViewVector(1.0F);
 			double d0 = 5.0D;
-			List<Entity> list = worldIn.getEntitiesInAABBexcluding(playerIn, playerIn.getBoundingBox().expand(vector3d.scale(5.0D)).grow(1.0D), field_219989_a);
+			List<Entity> list = world.getEntities(player,
+					player.getBoundingBox().expandTowards(vector3d.scale(5.0D)).inflate(1.0D), ENTITY_PREDICATE);
 			if (!list.isEmpty()) {
-				Vector3d vector3d1 = playerIn.getEyePosition(1.0F);
+				Vector3d vector3d1 = player.getEyePosition(1.0F);
 
 				for (Entity entity : list) {
-					AxisAlignedBB axisalignedbb = entity.getBoundingBox()
-							.grow((double) entity.getCollisionBorderSize());
+					AxisAlignedBB axisalignedbb = entity.getBoundingBox().inflate((double) entity.getPickRadius());
 					if (axisalignedbb.contains(vector3d1)) {
-						return ActionResult.resultPass(itemstack);
+						return ActionResult.pass(itemstack);
 					}
 				}
 			}
 
 			if (raytraceresult.getType() == RayTraceResult.Type.BLOCK) {
-				CCBoatEntity boatentity = new CCBoatEntity(worldIn, raytraceresult.getHitVec().x, raytraceresult.getHitVec().y, raytraceresult.getHitVec().z);
+				CCBoatEntity boatentity = new CCBoatEntity(world, raytraceresult.getLocation().x,
+						raytraceresult.getLocation().y, raytraceresult.getLocation().z);
 				boatentity.setBoatType(this.type);
-				boatentity.rotationYaw = playerIn.rotationYaw;
-				if (!worldIn.hasNoCollisions(boatentity, boatentity.getBoundingBox().grow(-0.1D))) {
-					return ActionResult.resultFail(itemstack);
+				boatentity.yRot = player.yRot;
+				if (!world.noCollision(boatentity, boatentity.getBoundingBox().inflate(-0.1D))) {
+					return ActionResult.fail(itemstack);
 				} else {
-					if (!worldIn.isRemote) {
-						worldIn.addEntity(boatentity);
-						if (!playerIn.abilities.isCreativeMode) {
+					if (!world.isClientSide) {
+						world.addFreshEntity(boatentity);
+						if (!player.abilities.instabuild) {
 							itemstack.shrink(1);
 						}
 					}
 
-					playerIn.addStat(Stats.ITEM_USED.get(this));
-					return ActionResult.func_233538_a_(itemstack, worldIn.isRemote());
+					player.awardStat(Stats.ITEM_USED.get(this));
+					return ActionResult.sidedSuccess(itemstack, world.isClientSide());
 				}
 			} else {
-				return ActionResult.resultPass(itemstack);
+				return ActionResult.pass(itemstack);
 			}
 		}
 	}

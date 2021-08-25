@@ -21,7 +21,7 @@ public class CCBoatRenderer extends BoatRenderer {
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(BoatEntity entity) {
+	public ResourceLocation getTextureLocation(BoatEntity entity) {
 		return BOAT_TEXTURES[((CCBoatEntity)entity).getCCBoatType().ordinal()];
 	}
 }

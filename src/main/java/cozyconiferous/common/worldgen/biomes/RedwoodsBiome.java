@@ -18,49 +18,50 @@ public class RedwoodsBiome {
 	public static Biome makeRedwoodsBiome(float depth, float scale, float temperature, float downfall, boolean isSnowy) {
 		MobSpawnInfo.Builder mobSpawnInfo = new MobSpawnInfo.Builder();
 		
-		mobSpawnInfo.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.WOLF, 8, 4, 4));
-		mobSpawnInfo.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.RABBIT, 4, 2, 3));
-		mobSpawnInfo.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.FOX, 8, 2, 4));
-		mobSpawnInfo.isValidSpawnBiomeForPlayer();
-		DefaultBiomeFeatures.withBatsAndHostiles(mobSpawnInfo);
+		mobSpawnInfo.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.WOLF, 8, 4, 4));
+		mobSpawnInfo.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.RABBIT, 4, 2, 3));
+		mobSpawnInfo.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.FOX, 8, 2, 4));
+		mobSpawnInfo.setPlayerCanSpawn();
+		DefaultBiomeFeatures.farmAnimals(mobSpawnInfo);
+		DefaultBiomeFeatures.commonSpawns(mobSpawnInfo);
 
 		float f = isSnowy ? -0.4F : temperature;
 		
-		BiomeGenerationSettings.Builder biomeGenBuilder = (new BiomeGenerationSettings.Builder()).withSurfaceBuilder(CCConfiguredSurfaceBuilders.REDWOODS);
-		DefaultBiomeFeatures.withStrongholdAndMineshaft(biomeGenBuilder);
-		biomeGenBuilder.withStructure(StructureFeatures.RUINED_PORTAL);
-		biomeGenBuilder.withStructure(StructureFeatures.VILLAGE_TAIGA);
-		biomeGenBuilder.withStructure(StructureFeatures.PILLAGER_OUTPOST);
+		BiomeGenerationSettings.Builder biomeGenBuilder = (new BiomeGenerationSettings.Builder()).surfaceBuilder(CCConfiguredSurfaceBuilders.REDWOODS);
+		DefaultBiomeFeatures.addDefaultOverworldLandStructures(biomeGenBuilder);
+		biomeGenBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
+		biomeGenBuilder.addStructureStart(StructureFeatures.VILLAGE_TAIGA);
+		biomeGenBuilder.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
 		
-		DefaultBiomeFeatures.withCavesAndCanyons(biomeGenBuilder);
-		DefaultBiomeFeatures.withLavaAndWaterLakes(biomeGenBuilder);
-		DefaultBiomeFeatures.withMonsterRoom(biomeGenBuilder);
-		DefaultBiomeFeatures.withForestRocks(biomeGenBuilder);
-		DefaultBiomeFeatures.withLargeFern(biomeGenBuilder);
-		DefaultBiomeFeatures.withCommonOverworldBlocks(biomeGenBuilder);
-		DefaultBiomeFeatures.withOverworldOres(biomeGenBuilder);
-		DefaultBiomeFeatures.withDisks(biomeGenBuilder);
-		DefaultBiomeFeatures.withDefaultFlowers(biomeGenBuilder);
-		DefaultBiomeFeatures.withGiantTaigaGrassVegetation(biomeGenBuilder);
-		DefaultBiomeFeatures.withNormalMushroomGeneration(biomeGenBuilder);
-		DefaultBiomeFeatures.withSugarCaneAndPumpkins(biomeGenBuilder);
-		DefaultBiomeFeatures.withLavaAndWaterSprings(biomeGenBuilder);
-		DefaultBiomeFeatures.withSparseBerries(biomeGenBuilder);
-		DefaultBiomeFeatures.withFrozenTopLayer(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultCarvers(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultLakes(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultMonsterRoom(biomeGenBuilder);
+		DefaultBiomeFeatures.addMossyStoneBlock(biomeGenBuilder);
+		DefaultBiomeFeatures.addFerns(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultUndergroundVariety(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultOres(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultSoftDisks(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultFlowers(biomeGenBuilder);
+		DefaultBiomeFeatures.addGiantTaigaVegetation(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultMushrooms(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultExtraVegetation(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultSprings(biomeGenBuilder);
+		DefaultBiomeFeatures.addSparseBerryBushes(biomeGenBuilder);
+		DefaultBiomeFeatures.addSurfaceFreezing(biomeGenBuilder);
 		
 		if(!isSnowy)
-			DefaultBiomeFeatures.withPlainGrassVegetation(biomeGenBuilder);
+			DefaultBiomeFeatures.addPlainVegetation(biomeGenBuilder);
 
 	      
 		return (new Biome.Builder()).precipitation(isSnowy ? RainType.SNOW : RainType.RAIN)
-				.category(Biome.Category.TAIGA).depth(depth).scale(scale).temperature(f)
+				.biomeCategory(Biome.Category.TAIGA).depth(depth).scale(scale).temperature(f)
 				.downfall(downfall)
-				.setEffects((new BiomeAmbience.Builder()).setWaterColor(4159204)
-						.setWaterFogColor(329011).setFogColor(12638463)
-						.withGrassColor(0x379332).withFoliageColor(0x379C32)
-						.withSkyColor(BiomeUtils.getSkyColorWithTemperatureModifier(0.25F))
-						.setMoodSound(MoodSoundAmbience.DEFAULT_CAVE).build())
-				.withMobSpawnSettings(mobSpawnInfo.copy())
-				.withGenerationSettings(biomeGenBuilder.build()).build();
+				.specialEffects((new BiomeAmbience.Builder()).waterColor(4159204)
+						.waterFogColor(329011).fogColor(12638463)
+						.grassColorOverride(0x379332).foliageColorOverride(0x379C32)
+						.skyColor(BiomeUtils.getSkyColorWithTemperatureModifier(0.25F))
+						.ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS).build())
+				.mobSpawnSettings(mobSpawnInfo.build())
+				.generationSettings(biomeGenBuilder.build()).build();
 	}
 }

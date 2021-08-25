@@ -10,12 +10,12 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 public class RedwoodTree extends BigTree {
 
 	@Override
-	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean largeHive) {
+	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random randomIn, boolean largeHive) {
 		return CCConfiguredFeatures.redwood;
 	}
 
 	@Override
-	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getHugeTreeFeature(Random rand) {
+	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredMegaFeature(Random rand) {
 		return CCConfiguredFeatures.huge_redwood;
 	}
 }

@@ -36,13 +36,13 @@ public class CCBiomes {
 	public static Biome pine_meadows = register(PineMeadowsBiome.makePineMeadowsBiome(), "pine_meadows");
 	
 	public static class Keys {
-		public static final RegistryKey<Biome> REDWOODS = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, new ResourceLocation(CozyConiferous.MOD_ID, "redwoods"));
-		public static final RegistryKey<Biome> REDWOOD_PEAKS = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, new ResourceLocation(CozyConiferous.MOD_ID, "redwood_peaks"));
-		public static final RegistryKey<Biome> SNOWY_REDWOODS = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, new ResourceLocation(CozyConiferous.MOD_ID, "snowy_redwoods"));
-		public static final RegistryKey<Biome> BOREAL_FOREST = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, new ResourceLocation(CozyConiferous.MOD_ID, "boreal_forest"));
-		public static final RegistryKey<Biome> SNOWY_BOREAL_FOREST = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, new ResourceLocation(CozyConiferous.MOD_ID, "snowy_boreal_forest"));
-		public static final RegistryKey<Biome> ALPINE_HEIGHTS = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, new ResourceLocation(CozyConiferous.MOD_ID, "alpine_heights"));
-		public static final RegistryKey<Biome> PINE_MEADOWS = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, new ResourceLocation(CozyConiferous.MOD_ID, "pine_meadows"));
+		public static final RegistryKey<Biome> REDWOODS = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(CozyConiferous.MOD_ID, "redwoods"));
+		public static final RegistryKey<Biome> REDWOOD_PEAKS = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(CozyConiferous.MOD_ID, "redwood_peaks"));
+		public static final RegistryKey<Biome> SNOWY_REDWOODS = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(CozyConiferous.MOD_ID, "snowy_redwoods"));
+		public static final RegistryKey<Biome> BOREAL_FOREST = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(CozyConiferous.MOD_ID, "boreal_forest"));
+		public static final RegistryKey<Biome> SNOWY_BOREAL_FOREST = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(CozyConiferous.MOD_ID, "snowy_boreal_forest"));
+		public static final RegistryKey<Biome> ALPINE_HEIGHTS = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(CozyConiferous.MOD_ID, "alpine_heights"));
+		public static final RegistryKey<Biome> PINE_MEADOWS = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(CozyConiferous.MOD_ID, "pine_meadows"));
 	}
 	
 	@SubscribeEvent

@@ -10,8 +10,9 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class CCConfiguredSurfaceBuilders {
 
-	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> REDWOODS = register("cc_redwoods", CCSurfaceBuilders.REDWOODS.func_242929_a(SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG));
-	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> ALPINE_HEIGHTS = register("cc_alpine_heights", CCSurfaceBuilders.ALPINE_HEIGHTS.func_242929_a(SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> REDWOODS = register("cc_redwoods", CCSurfaceBuilders.REDWOODS.configured(SurfaceBuilder.CONFIG_GRASS));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> ALPINE_HEIGHTS = register("cc_alpine_heights", CCSurfaceBuilders.ALPINE_HEIGHTS.configured(SurfaceBuilder.CONFIG_GRASS));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> PINE_MEADOWS = register("cc_pine_meadows", CCSurfaceBuilders.PINE_MEADOWS.configured(SurfaceBuilder.CONFIG_GRASS));
 	
 	private static <SC extends ISurfaceBuilderConfig> ConfiguredSurfaceBuilder<SC> register(String name,
 			ConfiguredSurfaceBuilder<SC> builder) {

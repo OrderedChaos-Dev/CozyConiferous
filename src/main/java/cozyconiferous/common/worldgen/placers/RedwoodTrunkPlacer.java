@@ -9,6 +9,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import cozyconiferous.init.CCBlocks;
+import cozyconiferous.init.CCFeatures;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationReader;
@@ -20,7 +21,7 @@ import net.minecraft.world.gen.trunkplacer.TrunkPlacerType;
 public class RedwoodTrunkPlacer extends AbstractTrunkPlacer {
 	
 	public static final Codec<RedwoodTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) -> {
-		return func_236915_a_(instance).apply(instance, RedwoodTrunkPlacer::new);
+		return trunkPlacerParts(instance).apply(instance, RedwoodTrunkPlacer::new);
 	});
 
 	public RedwoodTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
@@ -28,18 +29,18 @@ public class RedwoodTrunkPlacer extends AbstractTrunkPlacer {
 	}
 
 	@Override
-	protected TrunkPlacerType<?> func_230381_a_() {
-		return TrunkPlacerType.GIANT_TRUNK_PLACER;
+	protected TrunkPlacerType<?> type() {
+		return CCFeatures.BlockPlacers.REDWOOD_TRUNK_PLACER;
 	}
 
 	@Override
-	public List<FoliagePlacer.Foliage> func_230382_a_(IWorldGenerationReader world, Random rand, int height, BlockPos pos, Set<BlockPos> blocks, MutableBoundingBox boundingBox, BaseTreeFeatureConfig config) {
-		BlockPos blockpos = pos.down();
+	public List<FoliagePlacer.Foliage> placeTrunk(IWorldGenerationReader world, Random rand, int height, BlockPos pos, Set<BlockPos> blocks, MutableBoundingBox boundingBox, BaseTreeFeatureConfig config) {
+		BlockPos blockpos = pos.below();
 		//place dirt
-		func_236909_a_(world, blockpos);
-		func_236909_a_(world, blockpos.east());
-		func_236909_a_(world, blockpos.south());
-		func_236909_a_(world, blockpos.south().east());
+		setDirtAt(world, blockpos);
+		setDirtAt(world, blockpos.east());
+		setDirtAt(world, blockpos.south());
+		setDirtAt(world, blockpos.south().east());
 		
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
@@ -72,29 +73,29 @@ public class RedwoodTrunkPlacer extends AbstractTrunkPlacer {
 		placeBase(world, rand, blockpos$mutable, config, pos, 1, 5, 0, 3);
 		placeBase(world, rand, blockpos$mutable, config, pos, 1, 5, 1, 3);
 
-		return ImmutableList.of(new FoliagePlacer.Foliage(pos.up(height), 0, true));
+		return ImmutableList.of(new FoliagePlacer.Foliage(pos.above(height), 0, true));
 	}
 
 	private static void placeLog(IWorldGenerationReader world, Random rand, BlockPos.Mutable pos, Set<BlockPos> blocks, MutableBoundingBox boundingBox, BaseTreeFeatureConfig config, BlockPos start, int offX, int offY, int offZ) {
-		pos.setAndOffset(start, offX, offY, offZ);
+		pos.setWithOffset(start, offX, offY, offZ);
 		//place log
-		func_236910_a_(world, rand, pos, blocks, boundingBox, config);
+		placeLog(world, rand, pos, blocks, boundingBox, config);
 	}
 	
 	public static void placeBase(IWorldGenerationReader world, Random rand, BlockPos.Mutable pos, BaseTreeFeatureConfig config, BlockPos start, int heightMin, int heightMax, int offX, int offZ) {
 		int height = rand.nextInt(heightMax - heightMin) + heightMin;
 		int offY = 1;
-		while(offY > -4 && world.hasBlockState(pos.setAndOffset(start, offX, offY, offZ), (state) -> state.getMaterial().isReplaceable())) {
+		while(offY > -4 && world.isStateAtPosition(pos.setWithOffset(start, offX, offY, offZ), (state) -> state.getMaterial().isReplaceable())) {
 			offY--;
 		}
 		
 		for(int i = offY; i < height; i++) {
-			BlockPos.Mutable temp = pos.setAndOffset(start, offX, i, offZ);
+			BlockPos.Mutable temp = pos.setWithOffset(start, offX, i, offZ);
 			
 			if(i < height - 1)
-				world.setBlockState(temp, config.trunkProvider.getBlockState(rand, temp), 2);
+				world.setBlock(temp, config.trunkProvider.getState(rand, temp), 2);
 			else
-				world.setBlockState(temp, CCBlocks.redwood_wood.getDefaultState(), 2);
+				world.setBlock(temp, CCBlocks.redwood_wood.defaultBlockState(), 2);
 		}
 	}
 }

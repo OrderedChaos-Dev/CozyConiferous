@@ -18,30 +18,30 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class CCBoatEntity extends BoatEntity {
 
-	private static final DataParameter<Integer> CC_BOAT_TYPE = EntityDataManager.createKey(CCBoatEntity.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> CC_BOAT_TYPE = EntityDataManager.defineId(CCBoatEntity.class, DataSerializers.INT);
 
 	public CCBoatEntity(EntityType<? extends CCBoatEntity> type, World world) {
 		super(type, world);
-		this.preventEntitySpawning = true;
+		this.blocksBuilding = true;
 	}
 
 	public CCBoatEntity(World worldIn, double x, double y, double z) {
 		this(CCEntities.CC_BOAT, worldIn);
-		this.setPosition(x, y, z);
-		this.setMotion(Vector3d.ZERO);
-		this.prevPosX = x;
-		this.prevPosY = y;
-		this.prevPosZ = z;
+		this.setPos(x, y, z);
+		this.setDeltaMovement(Vector3d.ZERO);
+		this.xo = x;
+		this.yo = y;
+		this.zo = z;
 	}
 
 	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(CC_BOAT_TYPE, CCBoatEntity.CCType.FIR.ordinal());
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(CC_BOAT_TYPE, CCBoatEntity.CCType.FIR.ordinal());
 	}
 
 	@Override
-	public Item getItemBoat() {
+	public Item getDropItem() {
 		switch (this.getCCBoatType()) {
 		case FIR:
 		default:
@@ -54,27 +54,27 @@ public class CCBoatEntity extends BoatEntity {
 	}
 
 	@Override
-	protected void writeAdditional(CompoundNBT compound) {
+	protected void addAdditionalSaveData(CompoundNBT compound) {
 		compound.putString("Type", this.getCCBoatType().getName());
 	}
 
 	@Override
-	protected void readAdditional(CompoundNBT compound) {
+	protected void readAdditionalSaveData(CompoundNBT compound) {
 		if (compound.contains("Type", 8)) {
 			this.setBoatType(CCBoatEntity.CCType.getTypeFromString(compound.getString("Type")));
 		}
 	}
 
 	public void setBoatType(CCBoatEntity.CCType boatType) {
-		this.dataManager.set(CC_BOAT_TYPE, boatType.ordinal());
+		this.entityData.set(CC_BOAT_TYPE, boatType.ordinal());
 	}
 
 	public CCBoatEntity.CCType getCCBoatType() {
-		return CCBoatEntity.CCType.byId(this.dataManager.get(CC_BOAT_TYPE));
+		return CCBoatEntity.CCType.byId(this.entityData.get(CC_BOAT_TYPE));
 	}
 
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

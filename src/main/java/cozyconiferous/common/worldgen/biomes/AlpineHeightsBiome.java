@@ -14,35 +14,37 @@ public class AlpineHeightsBiome {
 
 	public static Biome makeAlpineHeightsBiome(float depth, float scale) {
 		MobSpawnInfo.Builder mobSpawnInfo = new MobSpawnInfo.Builder();
-		DefaultBiomeFeatures.withBatsAndHostiles(mobSpawnInfo);
+		DefaultBiomeFeatures.commonSpawns(mobSpawnInfo);
 		BiomeGenerationSettings.Builder biomeGenBuilder = (new BiomeGenerationSettings.Builder())
-				.withSurfaceBuilder(CCConfiguredSurfaceBuilders.ALPINE_HEIGHTS);
+				.surfaceBuilder(CCConfiguredSurfaceBuilders.ALPINE_HEIGHTS);
 
-		DefaultBiomeFeatures.withStrongholdAndMineshaft(biomeGenBuilder);
-		biomeGenBuilder.withStructure(StructureFeatures.RUINED_PORTAL_MOUNTAIN);
+		DefaultBiomeFeatures.addDefaultOverworldLandMesaStructures(biomeGenBuilder);
+		biomeGenBuilder.addStructureStart(StructureFeatures.RUINED_PORTAL_MOUNTAIN);
 		
-		DefaultBiomeFeatures.withCavesAndCanyons(biomeGenBuilder);
-		DefaultBiomeFeatures.withLavaAndWaterLakes(biomeGenBuilder);
-		DefaultBiomeFeatures.withMonsterRoom(biomeGenBuilder);
-		DefaultBiomeFeatures.withForestRocks(biomeGenBuilder);
-		DefaultBiomeFeatures.withLargeFern(biomeGenBuilder);
-		DefaultBiomeFeatures.withCommonOverworldBlocks(biomeGenBuilder);
-		DefaultBiomeFeatures.withOverworldOres(biomeGenBuilder);
-		DefaultBiomeFeatures.withDisks(biomeGenBuilder);
-		DefaultBiomeFeatures.withDefaultFlowers(biomeGenBuilder);
-		DefaultBiomeFeatures.withGiantTaigaGrassVegetation(biomeGenBuilder);
-		DefaultBiomeFeatures.withNormalMushroomGeneration(biomeGenBuilder);
-		DefaultBiomeFeatures.withSugarCaneAndPumpkins(biomeGenBuilder);
-		DefaultBiomeFeatures.withSparseBerries(biomeGenBuilder);
-		DefaultBiomeFeatures.withFrozenTopLayer(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultCarvers(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultLakes(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultMonsterRoom(biomeGenBuilder);
+		DefaultBiomeFeatures.addMossyStoneBlock(biomeGenBuilder);
+		DefaultBiomeFeatures.addFerns(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultUndergroundVariety(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultOres(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultSoftDisks(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultFlowers(biomeGenBuilder);
+		DefaultBiomeFeatures.addGiantTaigaVegetation(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultMushrooms(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultExtraVegetation(biomeGenBuilder);
+		DefaultBiomeFeatures.addExtraEmeralds(biomeGenBuilder);
+		DefaultBiomeFeatures.addSparseBerryBushes(biomeGenBuilder);
+		DefaultBiomeFeatures.addDefaultSprings(biomeGenBuilder);
+		DefaultBiomeFeatures.addSurfaceFreezing(biomeGenBuilder);
 		
-		return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).category(Biome.Category.EXTREME_HILLS).depth(depth)
+		return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.EXTREME_HILLS).depth(depth)
 				.scale(scale).temperature(-0.4F).downfall(0.3F)
-				.setEffects((new BiomeAmbience.Builder()).setWaterColor(4159204).setWaterFogColor(329011)
-				.setFogColor(12638463).withSkyColor(BiomeUtils.getSkyColorWithTemperatureModifier(2.0F))
-				.withFoliageColor(0x00994d).withGrassColor(0x00994d).setMoodSound(MoodSoundAmbience.DEFAULT_CAVE)
+				.specialEffects((new BiomeAmbience.Builder()).waterColor(4159204).waterFogColor(329011)
+				.fogColor(12638463).skyColor(BiomeUtils.getSkyColorWithTemperatureModifier(2.0F))
+				.foliageColorOverride(0x00994d).grassColorOverride(0x00994d).ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS)
 				.build())
-				.withMobSpawnSettings(mobSpawnInfo.copy())
-				.withGenerationSettings(biomeGenBuilder.build()).build();
+				.mobSpawnSettings(mobSpawnInfo.build())
+				.generationSettings(biomeGenBuilder.build()).build();
 	}
 }

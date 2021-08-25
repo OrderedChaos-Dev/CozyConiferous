@@ -10,8 +10,8 @@ public class BlockRendering {
 
 	@OnlyIn(Dist.CLIENT)
 	public static void registerRenderers() {
-		RenderType cutout = RenderType.getCutout();
-		RenderType cutout_mipped = RenderType.getCutoutMipped();
+		RenderType cutout = RenderType.cutout();
+		RenderType cutout_mipped = RenderType.cutoutMipped();
 		
 		RenderTypeLookup.setRenderLayer(CCBlocks.fir_door, cutout);
 		RenderTypeLookup.setRenderLayer(CCBlocks.fir_trapdoor, cutout);
